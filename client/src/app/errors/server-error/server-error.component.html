@@ -1,0 +1,8 @@
+<div class="container">
+    <h1>500 Internal Server Error</h1>
+    <ng-container *ngIf="error">
+        <h5 class="text-danger">Error: {{error.message}}</h5>
+        <p class="lead">That one was on us, try refreshing the page</p>
+        <code class="mt-5" style="background-color: whitesmoke;">{{error.details}}</code>
+    </ng-container>
+</div>
