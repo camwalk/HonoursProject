@@ -96,7 +96,7 @@
         "City": "Stonybrook",
         "Country": "Portugal",
         "Photos": [{
-            "url": "https://randomuser.me/api/portraits/male/28.jpg",
+            "url": "https://randomuser.me/api/portraits/men/28.jpg",
             "isMain": true
         }]
     },
@@ -113,7 +113,7 @@
         "City": "Fulford",
         "Country": "Azerbaijan",
         "Photos": [{
-            "url": "https://randomuser.me/api/portraits/male/23.jpg",
+            "url": "https://randomuser.me/api/portraits/men/23.jpg",
             "isMain": true
         }]
     },
@@ -130,7 +130,7 @@
         "City": "Blanco",
         "Country": "Dominica",
         "Photos": [{
-            "url": "https://randomuser.me/api/portraits/male/30.jpg",
+            "url": "https://randomuser.me/api/portraits/men/30.jpg",
             "isMain": true
         }]
     },
@@ -147,7 +147,7 @@
         "City": "Twilight",
         "Country": "Slovenia",
         "Photos": [{
-            "url": "https://randomuser.me/api/portraits/male/80.jpg",
+            "url": "https://randomuser.me/api/portraits/men/80.jpg",
             "isMain": true
         }]
     },
@@ -164,7 +164,7 @@
         "City": "Croom",
         "Country": "Turkey",
         "Photos": [{
-            "url": "https://randomuser.me/api/portraits/male/78.jpg",
+            "url": "https://randomuser.me/api/portraits/men/78.jpg",
             "isMain": true
         }]
     }
