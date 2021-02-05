@@ -83,7 +83,49 @@ namespace API.Controllers
                 return CreatedAtRoute("GetUser", new { username = user.UserName }, _mapper.Map<PhotoDto>(photo));
             }
 
-            return BadRequest("Problem adding photo");
+            return BadRequest("There was an error adding this photo");
+        }
+
+        [HttpPut("set-profile-picture/{photoId}")]
+        public async Task<ActionResult> SetProfilePicture(int photoId)
+        {
+            var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+
+            var photo = user.Photos.FirstOrDefault(x => x.Id ==photoId);
+
+            if (photo.IsMain) return BadRequest("This photo is already your profile picture");
+
+            var currentProfilePhoto = user.Photos.FirstOrDefault(x => x.IsMain);
+            if (currentProfilePhoto != null) currentProfilePhoto.IsMain = false;
+            photo.IsMain = true;
+
+            if(await _userRepository.SaveAllAsync()) return NoContent();
+
+            return BadRequest("Unable to set profile picture");
+        }
+
+        [HttpDelete("delete-photo/{photoId}")]
+        public async Task<ActionResult> DeletePhoto(int photoId)
+        {
+            var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+
+            var photo = user.Photos.FirstOrDefault(x => x.Id == photoId);
+
+            if (photo == null) return NotFound();
+
+            if (photo.IsMain) return BadRequest("You cannot delete the photo set as your profile picture");
+
+            if (photo.PublicId != null)
+            {
+                var result = await _photoService.DeletePhotoAsync(photo.PublicId);
+                if (result.Error != null) return BadRequest(result.Error.Message);
+            }
+
+            user.Photos.Remove(photo);
+
+            if (await _userRepository.SaveAllAsync()) return Ok();
+
+            return BadRequest("Error deleting photo");
         }
     }
 }
