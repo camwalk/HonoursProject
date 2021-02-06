@@ -22,6 +22,8 @@ import { MemberCardComponent } from './members/member-card/member-card.component
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
+import { InputTextComponent } from './_forms/input-text/input-text.component';
+import { InputDateComponent } from './_forms/input-date/input-date.component';
 
 
 @NgModule({
@@ -39,7 +41,9 @@ import { PhotoEditorComponent } from './members/photo-editor/photo-editor.compon
     ServerErrorComponent,
     MemberCardComponent,
     MemberEditComponent,
-    PhotoEditorComponent
+    PhotoEditorComponent,
+    InputTextComponent,
+    InputDateComponent
   ],
   imports: [
     BrowserModule,
