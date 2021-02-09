@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Member } from '../_models/member';
 import { PaginatedResult } from '../_models/pagination';
+import { UserParams } from '../_models/userParams';
 
 @Injectable({
   providedIn: 'root'
@@ -16,14 +17,8 @@ export class MembersService {
 
   constructor(private http: HttpClient) { }
 
-  getMembers(page?: number, itemsOnPage?: number) {
-    let params = new HttpParams();
-
-    if (page !== null && itemsOnPage !== null) {
-      params = params.append('pageNumber', page.toString());
-      params = params.append('pageLength', itemsOnPage.toString());
-    }
-
+  getMembers(userParams: UserParams) {
+    let params = this.getPaginationHeaders(userParams.pageNumber, userParams.pageSize);
     return this.http.get<Member[]>(this.baseUrl + 'users', { observe: 'response', params }).pipe(
       map(response => {
         this.paginatedResult.result = response.body;
@@ -33,6 +28,15 @@ export class MembersService {
         return this.paginatedResult;
       })
     )
+  }
+
+  private getPaginationHeaders(pageNumber: number, pageSize: number) {
+    let params = new HttpParams();
+
+    params = params.append('pageNumber', pageNumber.toString());
+    params = params.append('pageLength', pageSize.toString());
+
+    return params;
   }
 
   getMember(username: string) {
