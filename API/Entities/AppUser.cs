@@ -21,5 +21,7 @@ namespace API.Entities
         public string City { get; set; }
         public string Country { get; set; }
         public ICollection<Photo> Photos { get; set; }
+        public ICollection<DirectMessage> DirectMessagesSent { get; set; }
+        public ICollection<DirectMessage> DirectMessagesRecieved { get; set; }
     }
 }
