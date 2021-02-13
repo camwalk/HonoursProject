@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
 {
@@ -52,9 +54,30 @@ namespace API.Data
             return await PagedList<DirectMessageDto>.CreateAsync(directMessages, directMessageParams.PageNumber, directMessageParams.PageSize);
         }
 
-        public Task<IEnumerable<DirectMessageDto>> GetDirectMessageThread(int currentUserID, int recieverId)
+        public async Task<IEnumerable<DirectMessageDto>> GetDirectMessageThread(string currentUsername, string recieverUsername)
         {
-            throw new System.NotImplementedException();
+            var directMessages = await _context.DirectMessages
+                .Include(u => u.Sender).ThenInclude(p => p.Photos)
+                .Include(u => u.Reciever).ThenInclude(p => p.Photos)
+                .Where(m => m.Reciever.UserName == currentUsername
+                && m.Sender.UserName == recieverUsername
+                || m.Reciever.UserName == recieverUsername
+                && m.Sender.UserName == currentUsername
+            ).OrderBy(m => m.TimeSent).ToListAsync();
+
+            var unreadDirectMessages = directMessages.Where(m => m.TimeRead == null && m.Reciever.UserName == currentUsername).ToList();
+
+            if (unreadDirectMessages.Any())
+            {
+                foreach (var directMessage in unreadDirectMessages)
+                {
+                    directMessage.TimeRead = DateTime.Now;
+                }
+
+                await _context.SaveChangesAsync();
+            }
+
+            return _mapper.Map<IEnumerable<DirectMessageDto>>(directMessages);
         }
 
         public async Task<bool> SaveAllAsync()

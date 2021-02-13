@@ -63,5 +63,13 @@ namespace API.Controllers
 
             return directMessages;
         }
+
+        [HttpGet("thread/{username}")]
+        public async Task<ActionResult<IEnumerable<DirectMessageDto>>> GetDirectMessageThread(string username)
+        {
+            var currentUsername = User.GetUsername();
+
+            return Ok(await _directMessageRepository.GetDirectMessageThread(currentUsername, username));
+        }
     }
 }

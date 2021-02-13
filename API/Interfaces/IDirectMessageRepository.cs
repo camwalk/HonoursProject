@@ -12,7 +12,7 @@ namespace API.Interfaces
         void DeleteDirectMessage(DirectMessage directMessage);
         Task<DirectMessage> GetDirectMessage(int id);
         Task<PagedList<DirectMessageDto>> GetDirectMessagesForUser(DirectMessageParams directMessageParams);
-        Task<IEnumerable<DirectMessageDto>> GetDirectMessageThread(int currentUserID, int recieverId);
+        Task<IEnumerable<DirectMessageDto>> GetDirectMessageThread(string currentUsername, string recieverUsername);
         Task<bool> SaveAllAsync();
     }
 }
