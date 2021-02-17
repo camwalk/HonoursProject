@@ -13,6 +13,9 @@
         "Photos": [{
             "url": "https://randomuser.me/api/portraits/women/31.jpg",
             "isMain": true
+        }],
+        "PreferredInstruments": [{
+            "name": "Guitar"
         }]
     },
     {
@@ -30,6 +33,9 @@
         "Photos": [{
             "url": "https://randomuser.me/api/portraits/women/82.jpg",
             "isMain": true
+        }],
+        "PreferredInstruments": [{
+            "name": "Drums"
         }]
     },
     {
@@ -47,6 +53,9 @@
         "Photos": [{
             "url": "https://randomuser.me/api/portraits/women/36.jpg",
             "isMain": true
+        }],
+        "PreferredInstruments": [{
+            "name": "Keyboard"
         }]
     },
     {
@@ -64,6 +73,9 @@
         "Photos": [{
             "url": "https://randomuser.me/api/portraits/women/56.jpg",
             "isMain": true
+        }],
+        "PreferredInstruments": [{
+            "name": "Vocals"
         }]
     },
     {
@@ -81,6 +93,9 @@
         "Photos": [{
             "url": "https://randomuser.me/api/portraits/women/65.jpg",
             "isMain": true
+        }],
+        "PreferredInstruments": [{
+            "name": "Guitar"
         }]
     },
     {
@@ -98,6 +113,9 @@
         "Photos": [{
             "url": "https://randomuser.me/api/portraits/men/28.jpg",
             "isMain": true
+        }],
+        "PreferredInstruments": [{
+            "name": "Bass"
         }]
     },
     {
@@ -115,6 +133,9 @@
         "Photos": [{
             "url": "https://randomuser.me/api/portraits/men/23.jpg",
             "isMain": true
+        }],
+        "PreferredInstruments": [{
+            "name": "Bass"
         }]
     },
     {
@@ -132,6 +153,9 @@
         "Photos": [{
             "url": "https://randomuser.me/api/portraits/men/30.jpg",
             "isMain": true
+        }],
+        "PreferredInstruments": [{
+            "name": "Drums"
         }]
     },
     {
@@ -149,6 +173,9 @@
         "Photos": [{
             "url": "https://randomuser.me/api/portraits/men/80.jpg",
             "isMain": true
+        }],
+        "PreferredInstruments": [{
+            "name": "Guitar"
         }]
     },
     {
@@ -166,6 +193,9 @@
         "Photos": [{
             "url": "https://randomuser.me/api/portraits/men/78.jpg",
             "isMain": true
+        }],
+        "PreferredInstruments": [{
+            "name": "Keyboard"
         }]
     }
 ]

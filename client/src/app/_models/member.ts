@@ -1,3 +1,4 @@
+import { Instrument } from './instrument';
 import { Photo } from './photo';
 
 export interface Member {
@@ -15,5 +16,6 @@ export interface Member {
     city: string;
     country: string;
     photos: Photo[];
+    preferredInstruments: Instrument[];
 }
 
