@@ -71,5 +71,25 @@ namespace API.Controllers
 
             return Ok(await _directMessageRepository.GetDirectMessageThread(currentUsername, username));
         }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteDirectMessage(int id)
+        {
+            var username = User.GetUsername();
+
+            var directMessage = await _directMessageRepository.GetDirectMessage(id);
+
+            if (directMessage.Sender.UserName != username && directMessage.Reciever.UserName != username) return Unauthorized();
+
+            if (directMessage.Sender.UserName == username) directMessage.SenderDeleted = true;
+
+            if (directMessage.Reciever.UserName == username) directMessage.RecieverDeleted = true;
+
+            if(directMessage.RecieverDeleted && directMessage.SenderDeleted) _directMessageRepository.DeleteDirectMessage(directMessage);
+
+            if (await _directMessageRepository.SaveAllAsync()) return Ok();
+
+            return BadRequest("There was a problem deleting that message");
+        }
     }
 }

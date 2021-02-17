@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from '@kolkov/ngx-gallery';
+import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
+import { DirectMessage } from 'src/app/_models/directMessage';
 import { Member } from 'src/app/_models/member';
+import { DirectMessageService } from 'src/app/_services/direct-message.service';
 import { MembersService } from 'src/app/_services/members.service';
 
 @Component({
@@ -10,14 +13,23 @@ import { MembersService } from 'src/app/_services/members.service';
   styleUrls: ['./member-detail.component.css']
 })
 export class MemberDetailComponent implements OnInit {
+  @ViewChild('memberTabs', { static: true }) memberTabs: TabsetComponent;
+  currentTab: TabDirective;
   member: Member;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
+  directMessages: DirectMessage[] = [];
 
-  constructor(private memberService: MembersService, private route: ActivatedRoute) { }
+  constructor(private memberService: MembersService, private route: ActivatedRoute, private directMessageService: DirectMessageService) { }
 
   ngOnInit(): void {
-    this.loadMember();
+    this.route.data.subscribe(data => {
+      this.member = data.member;
+    })
+
+    this.route.queryParams.subscribe(params => {
+      params.tab ? this.selectTab(params.tab) : this.selectTab(0);
+    })
 
     this.galleryOptions = [
       {
@@ -29,6 +41,8 @@ export class MemberDetailComponent implements OnInit {
         preview: false
       }
     ]
+
+    this.galleryImages = this.getImages();
   }
 
   getImages(): NgxGalleryImage[] {
@@ -43,10 +57,20 @@ export class MemberDetailComponent implements OnInit {
     return imageUrls;
   }
 
-  loadMember() {
-    this.memberService.getMember(this.route.snapshot.paramMap.get('username')).subscribe(member => {
-      this.member = member;
-      this.galleryImages = this.getImages();
+  loadDirectMessages() {
+    this.directMessageService.getDirectMessageThread(this.member.username).subscribe(directMessages => {
+      this.directMessages = directMessages;
     })
+  }
+
+  selectTab(tabId: number) {
+    this.memberTabs.tabs[tabId].active = true;
+  }
+
+  onTabActivated(data: TabDirective) {
+    this.currentTab = data;
+    if (this.currentTab.heading === 'Messages' && this.directMessages.length === 0) {
+      this.loadDirectMessages();
+    }
   }
 }

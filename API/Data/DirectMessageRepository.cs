@@ -35,7 +35,7 @@ namespace API.Data
 
         public async Task<DirectMessage> GetDirectMessage(int id)
         {
-            return await _context.DirectMessages.FindAsync(id);
+            return await _context.DirectMessages.Include(u => u.Sender).Include(u => u.Reciever).SingleOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<PagedList<DirectMessageDto>> GetDirectMessagesForUser(DirectMessageParams directMessageParams)
@@ -44,9 +44,9 @@ namespace API.Data
 
             query = directMessageParams.Container switch
             {
-                "Inbox" => query.Where(u => u.Reciever.UserName == directMessageParams.Username),
-                "Outbox" => query.Where(u => u.Sender.UserName == directMessageParams.Username),
-                _ => query.Where(u => u.Reciever.UserName == directMessageParams.Username && u.TimeRead == null)
+                "Inbox" => query.Where(u => u.Reciever.UserName == directMessageParams.Username && u.RecieverDeleted == false),
+                "Outbox" => query.Where(u => u.Sender.UserName == directMessageParams.Username && u.SenderDeleted == false),
+                _ => query.Where(u => u.Reciever.UserName == directMessageParams.Username && u.RecieverDeleted == false && u.TimeRead == null)
             };
 
             var directMessages = query.ProjectTo<DirectMessageDto>(_mapper.ConfigurationProvider);
@@ -59,10 +59,10 @@ namespace API.Data
             var directMessages = await _context.DirectMessages
                 .Include(u => u.Sender).ThenInclude(p => p.Photos)
                 .Include(u => u.Reciever).ThenInclude(p => p.Photos)
-                .Where(m => m.Reciever.UserName == currentUsername
+                .Where(m => m.Reciever.UserName == currentUsername && m.RecieverDeleted == false
                 && m.Sender.UserName == recieverUsername
                 || m.Reciever.UserName == recieverUsername
-                && m.Sender.UserName == currentUsername
+                && m.Sender.UserName == currentUsername && m.SenderDeleted == false
             ).OrderBy(m => m.TimeSent).ToListAsync();
 
             var unreadDirectMessages = directMessages.Where(m => m.TimeRead == null && m.Reciever.UserName == currentUsername).ToList();

@@ -1,0 +1,40 @@
+<div class="card">
+  <div class="card-body">
+    <div *ngIf="directMessages?.length === 0">
+      No messages available
+    </div>
+    <ul *ngIf="directMessages?.length > 0" class="thread">
+      <li *ngFor="let directMessage of directMessages">
+        <div>
+          <span class="chat-img float-right">
+            <img class="rounded-circle" src="{{directMessage.senderPhotoUrl || './assets/user.png'}}"
+              alt="{{directMessage.senderUsername}}">
+          </span>
+          <div class="chat-body">
+            <div class="header">
+              <small class="text-muted">
+                <span class="fa fa-clocl-o">{{directMessage.timeSent}}</span>
+                <span class="text-danger" *ngIf="!directMessage.timeRead && directMessage.senderUsername !== username">
+                  (unread)
+                </span>
+                <span class="text-success" *ngIf="directMessage.timeRead && directMessage.senderUsername !== username">
+                  (read {{directMessage.timeRead}})
+                </span>
+              </small>
+            </div>
+            <p>{{directMessage.messageContent}}</p>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card-footer">
+    <form #messageForm="ngForm" (ngSubmit)="sendDirectMessage()" autocomplete="off">
+      <input name="messageContent" required [(ngModel)]="messageContent" type="text" class="form-control input-sm" placeholder="Send a direct message">
+      <div class="input-group-append">
+        <button [disabled]="!messageForm.valid" class="btn btn-primary" type="submit">Send</button>
+      </div>
+    </form>
+  </div>
+</div>
