@@ -33,11 +33,9 @@ namespace API.Data
 
             query = query.Where(u => u.UserName != userParams.CurrentUsername);
 
-            query = query.Where(u => u.City == userParams.SearchLocation);
+            query = query.Where(u => u.City == userParams.SearchLocation || u.Country == userParams.SearchLocation);
 
-            query = query.Where(u => u.Country == userParams.SearchLocation);
-
-            //query = query.Where(u => u.PreferredInstruments.Any(i => i.Name.ToLower() == userParams.SearchInstrument.ToLower()));
+            query = query.Where(u => u.PreferredInstruments.Any(i => i.Name == userParams.SearchInstrument));
 
             query = userParams.SortBy switch
             {
