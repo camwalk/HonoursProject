@@ -31,17 +31,17 @@ namespace API.Data
         {
             var query = _context.Users.AsQueryable();
 
-            query = query.Where(u => u.UserName != userParams.CurrentUser);
+            query = query.Where(u => u.UserName != userParams.CurrentUsername);
 
             query = query.Where(u => u.City.ToLower() == userParams.SearchLocation.ToLower() || u.Country.ToLower() == userParams.SearchLocation.ToLower());
 
             query = query.Where(u => u.PreferredInstruments.Any(i => i.Name.ToLower() == userParams.SearchInstrument.ToLower()));
 
-            // query = userParams.SortBy switch
-            // {
-            //     "created" => query.OrderByDescending(u => u.Created),
-            //     _ => query.OrderByDescending(u => u.LastActive)
-            // };
+            query = userParams.SortBy switch
+            {
+                "created" => query.OrderByDescending(u => u.Created),
+                _ => query.OrderByDescending(u => u.LastActive)
+            };
 
             return await PagedList<MemberDto>.CreateAsync(query.ProjectTo<MemberDto>(_mapper.ConfigurationProvider).AsNoTracking(), userParams.PageNumber, userParams.PageSize);
         }

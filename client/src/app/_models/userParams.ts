@@ -8,7 +8,7 @@ export class UserParams {
     searchInstrument = 'Guitar';
     sortBy = 'lastActive';
 
-    constructor(UserParams: User) {
-
+    constructor(user: User) {
+        
     }
 }
