@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace API.Data.Migrations
+namespace API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210216094056_MessageEntityAddedAgain")]
-    partial class MessageEntityAddedAgain
+    [Migration("20210222172640_Fix")]
+    partial class Fix
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -110,6 +110,25 @@ namespace API.Data.Migrations
                     b.ToTable("DirectMessages");
                 });
 
+            modelBuilder.Entity("API.Entities.Instrument", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("AppUserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("Instruments");
+                });
+
             modelBuilder.Entity("API.Entities.Photo", b =>
                 {
                     b.Property<int>("Id")
@@ -154,6 +173,13 @@ namespace API.Data.Migrations
                     b.Navigation("Sender");
                 });
 
+            modelBuilder.Entity("API.Entities.Instrument", b =>
+                {
+                    b.HasOne("API.Entities.AppUser", null)
+                        .WithMany("PreferredInstruments")
+                        .HasForeignKey("AppUserId");
+                });
+
             modelBuilder.Entity("API.Entities.Photo", b =>
                 {
                     b.HasOne("API.Entities.AppUser", "AppUser")
@@ -172,6 +198,8 @@ namespace API.Data.Migrations
                     b.Navigation("DirectMessagesSent");
 
                     b.Navigation("Photos");
+
+                    b.Navigation("PreferredInstruments");
                 });
 #pragma warning restore 612, 618
         }

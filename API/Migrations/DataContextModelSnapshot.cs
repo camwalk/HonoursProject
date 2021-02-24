@@ -3,16 +3,14 @@ using System;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace API.Data.Migrations
+namespace API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210210160517_MessageEntityAdded")]
-    partial class MessageEntityAdded
+    partial class DataContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -110,6 +108,25 @@ namespace API.Data.Migrations
                     b.ToTable("DirectMessages");
                 });
 
+            modelBuilder.Entity("API.Entities.Instrument", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("AppUserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("Instruments");
+                });
+
             modelBuilder.Entity("API.Entities.Photo", b =>
                 {
                     b.Property<int>("Id")
@@ -154,6 +171,13 @@ namespace API.Data.Migrations
                     b.Navigation("Sender");
                 });
 
+            modelBuilder.Entity("API.Entities.Instrument", b =>
+                {
+                    b.HasOne("API.Entities.AppUser", null)
+                        .WithMany("PreferredInstruments")
+                        .HasForeignKey("AppUserId");
+                });
+
             modelBuilder.Entity("API.Entities.Photo", b =>
                 {
                     b.HasOne("API.Entities.AppUser", "AppUser")
@@ -172,6 +196,8 @@ namespace API.Data.Migrations
                     b.Navigation("DirectMessagesSent");
 
                     b.Navigation("Photos");
+
+                    b.Navigation("PreferredInstruments");
                 });
 #pragma warning restore 612, 618
         }
