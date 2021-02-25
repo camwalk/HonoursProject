@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -31,17 +32,17 @@ namespace API.Data
         {
             var query = _context.Users.AsQueryable();
 
-            query = query.Where(u => u.UserName != userParams.CurrentUser);
+            query = query.Where(u => u.UserName != userParams.CurrentUsername);
 
-            query = query.Where(u => u.City.ToLower() == userParams.SearchLocation.ToLower() || u.Country.ToLower() == userParams.SearchLocation.ToLower());
+            if (userParams.SearchInstrument != null) query = query.Where(u => u.PreferredInstruments.Any(x => x.Name.Equals(userParams.SearchInstrument)));
 
-            query = query.Where(u => u.PreferredInstruments.Any(i => i.Name.ToLower() == userParams.SearchInstrument.ToLower()));
+            if (userParams.SearchLocation != null) query = query.Where(u => u.City == userParams.SearchLocation || u.Country == userParams.SearchLocation);
 
-            // query = userParams.SortBy switch
-            // {
-            //     "created" => query.OrderByDescending(u => u.Created),
-            //     _ => query.OrderByDescending(u => u.LastActive)
-            // };
+            query = userParams.SortBy switch
+            {
+                "created" => query.OrderByDescending(u => u.Created),
+                _ => query.OrderByDescending(u => u.LastActive)
+            };
 
             return await PagedList<MemberDto>.CreateAsync(query.ProjectTo<MemberDto>(_mapper.ConfigurationProvider).AsNoTracking(), userParams.PageNumber, userParams.PageSize);
         }
