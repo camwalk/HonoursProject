@@ -15,9 +15,9 @@ namespace API.Helpers
                 SourceMemberNamingConvention.Photos.FirstOrDefault(x => x.IsMain).Url))
                 .ForMember(dest => dest.Age, opt => opt.MapFrom(src => src.DateOfBirth.CalculateAge()));
             CreateMap<Photo, PhotoDto>();
+            CreateMap<Instrument, InstrumentDto>();
             CreateMap<MemberUpdateDto, AppUser>();
             CreateMap<RegisterDto, AppUser>();
-            CreateMap<Instrument, InstrumentDto>();
             CreateMap<DirectMessage, DirectMessageDto>()
             .ForMember(dest => dest.SenderPhotoUrl, opt => opt.MapFrom(src => src.Sender.Photos.FirstOrDefault(x => x.IsMain).Url))
             .ForMember(dest => dest.RecieverPhotoUrl, opt => opt.MapFrom(src => src.Reciever.Photos.FirstOrDefault(x => x.IsMain).Url));

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -31,11 +32,11 @@ namespace API.Data
         {
             var query = _context.Users.AsQueryable();
 
-            query = query.Where(u => u.UserName != userParams.CurrentUser);
+            query = query.Where(u => u.UserName != userParams.CurrentUsername);
 
-            query = query.Where(u => u.City == userParams.SearchLocation || u.Country == userParams.SearchLocation);
+            if (userParams.SearchInstrument != null) query = query.Where(u => u.PreferredInstruments.Any(x => x.Name.Equals(userParams.SearchInstrument)));
 
-            query = query.Where(u => u.PreferredInstruments.Any(i => i.Name == userParams.SearchInstrument));
+            if (userParams.SearchLocation != null) query = query.Where(u => u.City == userParams.SearchLocation || u.Country == userParams.SearchLocation);
 
             query = userParams.SortBy switch
             {
