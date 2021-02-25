@@ -4,8 +4,8 @@ export class UserParams {
     gender: string;
     pageNumber = 1;
     pageSize = 5;
-    searchLocation = 'Reunion';
-    searchInstrument = 'Guitar';
+    searchLocation = '';
+    searchInstrument = '';
     sortBy = 'lastActive';
 
     constructor(user: User) {
