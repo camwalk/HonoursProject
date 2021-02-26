@@ -13,12 +13,12 @@
           <div class="chat-body">
             <div class="header">
               <small class="text-muted">
-                <span class="fa fa-clocl-o">{{directMessage.timeSent}}</span>
+                <span class="fa fa-clocl-o">{{directMessage.timeSent | timeago}}</span>
                 <span class="text-danger" *ngIf="!directMessage.timeRead && directMessage.senderUsername !== username">
                   (unread)
                 </span>
                 <span class="text-success" *ngIf="directMessage.timeRead && directMessage.senderUsername !== username">
-                  (read {{directMessage.timeRead}})
+                  (read {{directMessage.timeRead | timeago}})
                 </span>
               </small>
             </div>

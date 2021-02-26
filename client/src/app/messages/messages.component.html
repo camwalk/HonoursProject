@@ -39,7 +39,7 @@
           <strong>{{directMessage.senderUsername | titlecase}}</strong>
         </div>
       </td>
-      <td>{{directMessage.timeSent}}</td>
+      <td>{{directMessage.timeSent | timeago}}</td>
       <td>
         <button (click)="$event.stopPropagation()" (click)="deleteDirectMessage(directMessage.id)"class='btn btn-danger'>Delete</button>
       </td>
