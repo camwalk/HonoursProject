@@ -15,6 +15,7 @@ export interface Member {
     background: string;
     city: string;
     country: string;
+    experienceLevel: string;
     photos: Photo[];
     preferredInstruments: Instrument[];
 }

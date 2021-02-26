@@ -5,6 +5,7 @@ namespace API.Helpers
         public string CurrentUsername { get; set; }
         public string SearchLocation { get; set; }
         public string SearchInstrument { get; set; }
+        public string SearchExperience { get; set; }
         public string SortBy { get; set; } = "lastActive";
     }
 }

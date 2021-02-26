@@ -17,6 +17,11 @@ export class MemberListComponent implements OnInit {
   pagination: Pagination;
   userParams: UserParams;
   user: User;
+  dropdownOptions = [
+    {value: '', display: 'Any'},
+    {value: 'Casual', display: 'Casual'},
+    {value: 'Professional', display: 'Professional'}
+  ];
 
   constructor(private memberService: MembersService) { 
     this.userParams = this.memberService.getUserParams();

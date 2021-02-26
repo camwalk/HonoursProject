@@ -38,6 +38,8 @@ namespace API.Data
 
             if (userParams.SearchLocation != null) query = query.Where(u => u.City == userParams.SearchLocation || u.Country == userParams.SearchLocation);
 
+            if (userParams.SearchExperience != null) query = query.Where(u => u.ExperienceLevel == userParams.SearchExperience);
+
             query = userParams.SortBy switch
             {
                 "created" => query.OrderByDescending(u => u.Created),

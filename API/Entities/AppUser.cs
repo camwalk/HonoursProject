@@ -20,6 +20,7 @@ namespace API.Entities
         public string Background { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
+        public string ExperienceLevel { get; set; }
         public ICollection<Photo> Photos { get; set; }
         public ICollection<Instrument> PreferredInstruments { get; set; }
         public ICollection<DirectMessage> DirectMessagesSent { get; set; }

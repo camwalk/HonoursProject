@@ -6,9 +6,10 @@ export class UserParams {
     pageSize = 5;
     searchLocation = '';
     searchInstrument = '';
+    searchExperience = '';
     sortBy = 'lastActive';
 
     constructor(user: User) {
-        
+
     }
 }

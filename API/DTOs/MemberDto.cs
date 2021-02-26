@@ -18,6 +18,7 @@ namespace API.DTOs
         public string Background { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
+        public string ExperienceLevel { get; set; }
         public ICollection<PhotoDto> Photos { get; set; }
         public ICollection<InstrumentDto> PreferredInstruments { get; set; }
     }

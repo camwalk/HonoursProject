@@ -10,6 +10,7 @@
         "Background": "Ut ea ut nulla irure cupidatat proident laboris do.",
         "City": "Bartonsville",
         "Country": "Greenland",
+        "ExperienceLevel": "Casual",
         "Photos": [{
             "url": "https://randomuser.me/api/portraits/women/31.jpg",
             "isMain": true
@@ -30,6 +31,7 @@
         "Background": "Occaecat ipsum sit amet ex dolor laboris tempor.",
         "City": "Bethany",
         "Country": "Reunion",
+        "ExperienceLevel": "Professional",
         "Photos": [{
             "url": "https://randomuser.me/api/portraits/women/82.jpg",
             "isMain": true
@@ -50,6 +52,7 @@
         "Background": "Voluptate pariatur velit non exercitation magna voluptate.",
         "City": "Falmouth",
         "Country": "Lebanon",
+        "ExperienceLevel": "Casual",
         "Photos": [{
             "url": "https://randomuser.me/api/portraits/women/36.jpg",
             "isMain": true
@@ -70,6 +73,7 @@
         "Background": "Tempor veniam fugiat irure eu esse fugiat veniam.",
         "City": "Hackneyville",
         "Country": "Viet Nam",
+        "ExperienceLevel": "Casual",
         "Photos": [{
             "url": "https://randomuser.me/api/portraits/women/56.jpg",
             "isMain": true
@@ -90,6 +94,7 @@
         "Background": "Est adipisicing Lorem non non do ipsum pariatur commodo qui do do proident.",
         "City": "Ventress",
         "Country": "Nepal",
+        "ExperienceLevel": "Casual",
         "Photos": [{
             "url": "https://randomuser.me/api/portraits/women/65.jpg",
             "isMain": true
@@ -110,6 +115,7 @@
         "Background": "Ut esse dolore consectetur ad tempor minim non consectetur labore eiusmod.",
         "City": "Stonybrook",
         "Country": "Portugal",
+        "ExperienceLevel": "Professional",
         "Photos": [{
             "url": "https://randomuser.me/api/portraits/men/28.jpg",
             "isMain": true
@@ -130,6 +136,7 @@
         "Background": "In reprehenderit occaecat elit pariatur excepteur labore exercitation eu sit et esse labore.",
         "City": "Fulford",
         "Country": "Azerbaijan",
+        "ExperienceLevel": "Casual",
         "Photos": [{
             "url": "https://randomuser.me/api/portraits/men/23.jpg",
             "isMain": true
@@ -150,6 +157,7 @@
         "Background": "Et amet ea et officia veniam commodo ipsum magna elit exercitation tempor exercitation.",
         "City": "Blanco",
         "Country": "Dominica",
+        "ExperienceLevel": "Casual",
         "Photos": [{
             "url": "https://randomuser.me/api/portraits/men/30.jpg",
             "isMain": true
@@ -170,6 +178,7 @@
         "Background": "Ut in ut laborum sunt elit ea.",
         "City": "Twilight",
         "Country": "Slovenia",
+        "ExperienceLevel": "Casual",
         "Photos": [{
             "url": "https://randomuser.me/api/portraits/men/80.jpg",
             "isMain": true
@@ -190,6 +199,7 @@
         "Background": "Excepteur occaecat consectetur officia mollit est officia esse voluptate aliquip.",
         "City": "Croom",
         "Country": "Turkey",
+        "ExperienceLevel": "Casual",
         "Photos": [{
             "url": "https://randomuser.me/api/portraits/men/78.jpg",
             "isMain": true

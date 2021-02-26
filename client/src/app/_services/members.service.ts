@@ -51,6 +51,7 @@ export class MembersService {
 
     params = params.append('searchLocation', userParams.searchLocation.toString());
     params = params.append('searchInstrument', userParams.searchInstrument.toString());
+    params = params.append('searchExperience', userParams.searchExperience.toString());
     params = params.append('sortBy', userParams.sortBy);
 
     return getPaginatedResult<Member[]>(this.baseUrl + 'users', params, this.http)
