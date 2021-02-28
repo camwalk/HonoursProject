@@ -79,6 +79,10 @@ export class MembersService {
     )
   }
 
+  addInstrument(newInstrument: string) {
+    return this.http.post(this.baseUrl + 'users/add-instrument/' + newInstrument, {});
+  }
+
   setProfilePicture(photoId: number) {
     return this.http.put(this.baseUrl + 'users/set-profile-picture/' + photoId, {});
   }

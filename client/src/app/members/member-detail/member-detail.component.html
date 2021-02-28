@@ -22,7 +22,7 @@
       </div>
       <div class="card-footer">
         <div class="btn-group d-flex">
-          <button (click)="selectTab(3)" class="btn-success">Message</button>
+          <button (click)="selectTab(3)" class="btn btn-success">Message</button>
         </div>
       </div>
     </div>
@@ -32,8 +32,14 @@
       <tab heading='About {{member.knownAs}}' (selectTab)="onTabActivated($event)">
         <h4>Description</h4>
         <p>{{member.introduction}}</p>
-        <h4>Searching for</h4>
-        <p>{{member.searchingFor}}</p>
+        <h4>Experience Level</h4>
+        <p>{{member.experienceLevel}}</p>
+        <h4>Preferred Instruments</h4>
+      <div class="row">
+        <div class="col-2" *ngFor="let preferredInstrument of preferredInstruments">
+        <p class="btn btn-success">{{preferredInstrument.name}}</p>
+      </div>
+    </div>
       </tab>
       <tab heading='Background' (selectTab)="onTabActivated($event)">
         <h4>Background</h4>

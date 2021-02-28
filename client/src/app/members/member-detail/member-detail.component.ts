@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from '@kolkov/ngx-gallery';
 import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
 import { DirectMessage } from 'src/app/_models/directMessage';
+import { Instrument } from 'src/app/_models/instrument';
 import { Member } from 'src/app/_models/member';
 import { DirectMessageService } from 'src/app/_services/direct-message.service';
 import { MembersService } from 'src/app/_services/members.service';
@@ -16,9 +17,11 @@ export class MemberDetailComponent implements OnInit {
   @ViewChild('memberTabs', { static: true }) memberTabs: TabsetComponent;
   currentTab: TabDirective;
   member: Member;
+  preferredInstrument: Instrument;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
   directMessages: DirectMessage[] = [];
+  preferredInstruments: Instrument[] = [];
 
   constructor(private memberService: MembersService, private route: ActivatedRoute, private directMessageService: DirectMessageService) { }
 
@@ -43,6 +46,8 @@ export class MemberDetailComponent implements OnInit {
     ]
 
     this.galleryImages = this.getImages();
+
+    this.preferredInstruments = this.member.preferredInstruments;
   }
 
   getImages(): NgxGalleryImage[] {

@@ -134,5 +134,22 @@ namespace API.Controllers
 
             return BadRequest("Error deleting photo");
         }
+
+        [HttpPost("add-instrument/{newInstrument}")]
+        public async Task<ActionResult<InstrumentDto>> AddInstrument(string newInstrument)
+        {
+            var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+
+            var instrument = new Instrument
+            {
+                Name = newInstrument,
+            };
+
+            user.PreferredInstruments.Add(instrument);
+
+            if (await _userRepository.SaveAllAsync()) return Ok();
+
+            return BadRequest("There was an error adding this instrument");
+        }
     }
 }

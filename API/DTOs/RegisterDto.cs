@@ -11,7 +11,6 @@ namespace API.DTOs
         [Required] public DateTime DateOfBirth { get; set; }
         [Required] public string City { get; set; }
         [Required] public string Country { get; set; }
-        [Required] public string ExperienceLevel { get; set; }
 
         [Required]
         [StringLength(8, MinimumLength = 4)]

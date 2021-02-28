@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
+import { Instrument } from 'src/app/_models/instrument';
 import { Member } from 'src/app/_models/member';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
@@ -16,6 +17,12 @@ export class MemberEditComponent implements OnInit {
   @ViewChild('editForm') editForm: NgForm;
   member: Member;
   user: User;
+  dropdownOptions = [
+    {value: 'Casual', display: 'Casual'},
+    {value: 'Professional', display: 'Professional'}
+  ];
+  preferredInstruments: Instrument[] = [];
+
   @HostListener('window:beforeunload', ['$event']) unloadNotification($event: any) {
     if (this.editForm.dirty) {
       $event.returnValue = true;
@@ -33,6 +40,7 @@ export class MemberEditComponent implements OnInit {
   loadMember() {
     this.memberService.getMember(this.user.username).subscribe(member => {
       this.member = member;
+      this.preferredInstruments = this.member.preferredInstruments;
     })
   }
 
@@ -41,5 +49,16 @@ export class MemberEditComponent implements OnInit {
       this.toastr.success('Profile updated successfully')
       this.editForm.reset(this.member);
     })
+  }
+
+  addInstrument(newInstrument: string){
+    this.memberService.addInstrument(newInstrument).subscribe(() => {
+      this.toastr.success('Instrument added successfully')
+      this.editForm.reset(this.member);
+    })
+  }
+
+  removeInstrument(instrumentName) {
+    this.preferredInstruments = this.preferredInstruments.filter(i => i.name.toString() !== instrumentName)
   }
 }

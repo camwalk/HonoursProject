@@ -29,7 +29,7 @@
         </div>
       </div>
       <div class="card-footer">
-        <button [disabled]="!editForm.dirty" form="editForm" type="submit" class="btn-success btn-block">Save
+        <button form="editForm" type="submit" class="btn btn-success btn-block">Save
           Changes</button>
       </div>
     </div>
@@ -40,8 +40,6 @@
         <form #editForm="ngForm" id="editForm" (ngSubmit)="updateMember()">
           <h4>Description</h4>
           <textarea class="form-control" [(ngModel)]="member.introduction" name="introduction" rows="6"></textarea>
-          <h4 class="mt-2">Searching for</h4>
-          <textarea class="form-control" [(ngModel)]="member.searchingFor" name="searchingFor" rows="6"></textarea>
           <h4 class="mt-2">Background</h4>
           <textarea class="form-control" [(ngModel)]="member.background" name="background" rows="6"></textarea>
           <h4 class="mt-2">Location Details:</h4>
@@ -51,6 +49,21 @@
             <label for="country">Country: </label>
             <input [(ngModel)]="member.country" type="text" name="country" class="form-control mx-2">
           </div>
+          <h4 class="mt-2">Experience Level</h4>
+          <select name="searchExperience" [(ngModel)]="member.experienceLevel" class="form-control ml-1">
+            <option *ngFor="let o of dropdownOptions" [value]="o.value">{{o.display}}</option>
+          </select>
+          <h4 class="mt-2">Preferred Instruments</h4>
+          <div class="row">
+            <div style="padding-left: 20px;" *ngFor="let preferredInstrument of preferredInstruments">
+              <p class="btn btn-success">{{preferredInstrument.name}}</p>
+              <p class="btn btn-danger" (click)="removeInstrument(preferredInstrument.name.toString())"><i class="fa fa-remove"></i></p>
+            </div>
+          </div>
+          <textarea class="form-control mx-2" #newInstrument name="newInstrument"
+              rows="1"></textarea>
+              <br>
+              <p class="btn btn-success mx-2"(click)="addInstrument(newInstrument.value)">Add Instrument</p>
         </form>
       </tab>
       <tab heading='Edit Photos'>
