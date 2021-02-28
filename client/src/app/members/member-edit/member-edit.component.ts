@@ -56,9 +56,14 @@ export class MemberEditComponent implements OnInit {
       this.toastr.success('Instrument added successfully')
       this.editForm.reset(this.member);
     })
+    window.location.reload();
   }
 
   removeInstrument(instrumentName) {
-    this.preferredInstruments = this.preferredInstruments.filter(i => i.name.toString() !== instrumentName)
+    this.memberService.deleteInstrument(instrumentName).subscribe(() => {
+      this.toastr.success('Instrument removed successfully')
+      this.editForm.reset(this.member);
+    })
+    window.location.reload();
   }
 }

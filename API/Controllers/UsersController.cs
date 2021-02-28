@@ -151,5 +151,19 @@ namespace API.Controllers
 
             return BadRequest("There was an error adding this instrument");
         }
+
+        [HttpDelete("delete-instrument/{instrumentName}")]
+        public async Task<ActionResult<InstrumentDto>> DeleteInstrument(string instrumentName)
+        {
+            var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+
+            var instrument = user.PreferredInstruments.FirstOrDefault(x => x.Name == instrumentName);
+
+            user.PreferredInstruments.Remove(instrument);
+
+            if (await _userRepository.SaveAllAsync()) return Ok();
+
+            return BadRequest("There was an error removing this instrument");
+        }
     }
 }

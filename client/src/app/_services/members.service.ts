@@ -83,6 +83,10 @@ export class MembersService {
     return this.http.post(this.baseUrl + 'users/add-instrument/' + newInstrument, {});
   }
 
+  deleteInstrument(instrumentName: string) {
+    return this.http.delete(this.baseUrl + 'users/delete-instrument/' + instrumentName, {});
+  }
+
   setProfilePicture(photoId: number) {
     return this.http.put(this.baseUrl + 'users/set-profile-picture/' + photoId, {});
   }
