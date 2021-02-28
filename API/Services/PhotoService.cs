@@ -38,7 +38,7 @@ namespace API.Services
                 };
                 uploadResult = await _cloudinary.UploadAsync(uploadParams);
             }
-            
+
             return uploadResult;
         }
 
