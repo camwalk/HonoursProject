@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Instrument } from '../_models/instrument';
 import { AccountService } from '../_services/account.service';
 
 @Component({
@@ -13,6 +14,11 @@ export class RegisterComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
   registerForm: FormGroup;
   validationErrors: string[] = [];
+  dropdownOptions = [
+    {value: 'Casual', display: 'Casual'},
+    {value: 'Professional', display: 'Professional'}
+  ];
+  preferredInstruments: Instrument[] = [];
 
   constructor(private accountService: AccountService, private toastr: ToastrService, private formBuilder: FormBuilder, private router: Router) { }
 
@@ -26,6 +32,7 @@ export class RegisterComponent implements OnInit {
       gender: ['male'],
       knownAs: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
+      experienceLevel: ['', Validators.required],
       city: ['', Validators.required],
       country: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(8)]],
@@ -51,5 +58,4 @@ export class RegisterComponent implements OnInit {
   cancel() {
     this.cancelRegister.emit(false);
   }
-
 }

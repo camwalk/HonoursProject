@@ -55,15 +55,15 @@ export class MemberEditComponent implements OnInit {
     this.memberService.addInstrument(newInstrument).subscribe(() => {
       this.toastr.success('Instrument added successfully')
       this.editForm.reset(this.member);
+      window.location.reload();
     })
-    window.location.reload();
   }
 
   removeInstrument(instrumentName) {
     this.memberService.deleteInstrument(instrumentName).subscribe(() => {
       this.toastr.success('Instrument removed successfully')
       this.editForm.reset(this.member);
+      window.location.reload();
     })
-    window.location.reload();
   }
 }

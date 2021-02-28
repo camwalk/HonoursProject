@@ -2,7 +2,7 @@
   <h2 class="text-center text-primary">Sign Up</h2>
   <hr>
   <div class="form-group">
-    <label class ="control-label" style="margin-right: 10px;">I am a: </label>
+    <label class="control-label" style="margin-right: 10px;">I am a: </label>
     <label class="radio-inline">
       <input type="radio" value='male' formControlName='gender'>Male
     </label>
@@ -17,10 +17,16 @@
   <app-input-text [formControl]='registerForm.controls["knownAs"]' [label]='"Name"'></app-input-text>
   <app-input-date [formControl]='registerForm.controls["dateOfBirth"]' [label]='"Date of Birth"'></app-input-date>
   <app-input-text [formControl]='registerForm.controls["city"]' [label]='"City"'></app-input-text>
+  <select [formControl]='registerForm.controls["experienceLevel"]' name="experienceLevel" class="form-control">
+    <option value="" selected disabled hidden>Experience Level</option>
+    <option *ngFor="let o of dropdownOptions" [value]="o.value">{{o.display}}</option>
+  </select>
+  <br>
   <app-input-text [formControl]='registerForm.controls["country"]' [label]='"Country"'></app-input-text>
   <app-input-text [formControl]='registerForm.controls["password"]' [label]='"Password"' [type]='"password"'>
   </app-input-text>
-  <app-input-text [formControl]='registerForm.controls["confirmPassword"]' [label]='"Confirm Password"' [type]='"password"'>
+  <app-input-text [formControl]='registerForm.controls["confirmPassword"]' [label]='"Confirm Password"'
+    [type]='"password"'>
   </app-input-text>
   <div class="row" *ngIf="validationErrors.length > 0">
     <ul class="text-danger">

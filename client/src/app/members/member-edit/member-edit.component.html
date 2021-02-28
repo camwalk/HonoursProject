@@ -50,7 +50,7 @@
             <input [(ngModel)]="member.country" type="text" name="country" class="form-control mx-2">
           </div>
           <h4 class="mt-2">Experience Level</h4>
-          <select name="searchExperience" [(ngModel)]="member.experienceLevel" class="form-control ml-1">
+          <select name="experienceLevel" [(ngModel)]="member.experienceLevel" class="form-control ml-1">
             <option *ngFor="let o of dropdownOptions" [value]="o.value">{{o.display}}</option>
           </select>
           <h4 class="mt-2">Preferred Instruments</h4>
