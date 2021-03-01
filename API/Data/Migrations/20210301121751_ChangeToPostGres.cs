@@ -1,9 +1,10 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace API.Migrations
+namespace API.Data.Migrations
 {
-    public partial class Fix : Migration
+    public partial class ChangeToPostGres : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,21 +12,22 @@ namespace API.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    UserName = table.Column<string>(type: "TEXT", nullable: true),
-                    PasswordHash = table.Column<byte[]>(type: "BLOB", nullable: true),
-                    PasswordSalt = table.Column<byte[]>(type: "BLOB", nullable: true),
-                    DateOfBirth = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    KnownAs = table.Column<string>(type: "TEXT", nullable: true),
-                    Created = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    LastActive = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Gender = table.Column<string>(type: "TEXT", nullable: true),
-                    Introduction = table.Column<string>(type: "TEXT", nullable: true),
-                    SearchingFor = table.Column<string>(type: "TEXT", nullable: true),
-                    Background = table.Column<string>(type: "TEXT", nullable: true),
-                    City = table.Column<string>(type: "TEXT", nullable: true),
-                    Country = table.Column<string>(type: "TEXT", nullable: true)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserName = table.Column<string>(type: "text", nullable: true),
+                    PasswordHash = table.Column<byte[]>(type: "bytea", nullable: true),
+                    PasswordSalt = table.Column<byte[]>(type: "bytea", nullable: true),
+                    DateOfBirth = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    KnownAs = table.Column<string>(type: "text", nullable: true),
+                    Created = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    LastActive = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    Gender = table.Column<string>(type: "text", nullable: true),
+                    Introduction = table.Column<string>(type: "text", nullable: true),
+                    SearchingFor = table.Column<string>(type: "text", nullable: true),
+                    Background = table.Column<string>(type: "text", nullable: true),
+                    City = table.Column<string>(type: "text", nullable: true),
+                    Country = table.Column<string>(type: "text", nullable: true),
+                    ExperienceLevel = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -36,17 +38,17 @@ namespace API.Migrations
                 name: "DirectMessages",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    SenderId = table.Column<int>(type: "INTEGER", nullable: false),
-                    SenderUsername = table.Column<string>(type: "TEXT", nullable: true),
-                    RecieverId = table.Column<int>(type: "INTEGER", nullable: false),
-                    RecieverUsername = table.Column<string>(type: "TEXT", nullable: true),
-                    MessageContent = table.Column<string>(type: "TEXT", nullable: true),
-                    TimeRead = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    TimeSent = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    SenderDeleted = table.Column<bool>(type: "INTEGER", nullable: false),
-                    RecieverDeleted = table.Column<bool>(type: "INTEGER", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    SenderId = table.Column<int>(type: "integer", nullable: false),
+                    SenderUsername = table.Column<string>(type: "text", nullable: true),
+                    RecieverId = table.Column<int>(type: "integer", nullable: false),
+                    RecieverUsername = table.Column<string>(type: "text", nullable: true),
+                    MessageContent = table.Column<string>(type: "text", nullable: true),
+                    TimeRead = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    TimeSent = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    SenderDeleted = table.Column<bool>(type: "boolean", nullable: false),
+                    RecieverDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -69,10 +71,10 @@ namespace API.Migrations
                 name: "Instruments",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: true),
-                    AppUserId = table.Column<int>(type: "INTEGER", nullable: true)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    AppUserId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -89,12 +91,12 @@ namespace API.Migrations
                 name: "Photos",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Url = table.Column<string>(type: "TEXT", nullable: true),
-                    IsMain = table.Column<bool>(type: "INTEGER", nullable: false),
-                    PublicId = table.Column<string>(type: "TEXT", nullable: true),
-                    AppUserId = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Url = table.Column<string>(type: "text", nullable: true),
+                    IsMain = table.Column<bool>(type: "boolean", nullable: false),
+                    PublicId = table.Column<string>(type: "text", nullable: true),
+                    AppUserId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
