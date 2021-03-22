@@ -22,7 +22,7 @@ export class MemberMessagesComponent implements OnInit {
   sendDirectMessage() {
     this.directMessageService.sendDirectMessage(this.username, this.messageContent).subscribe(directMessage =>{
       this.directMessages.push(directMessage);
-      this.messageForm.reset();
+      this.messageForm.reset(); 
     })
   }
 }
