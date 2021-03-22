@@ -52,11 +52,16 @@ export class MemberEditComponent implements OnInit {
   }
 
   addInstrument(newInstrument: string){
-    this.memberService.addInstrument(newInstrument).subscribe(() => {
-      this.toastr.success('Instrument added successfully')
-      this.editForm.reset(this.member);
-      window.location.reload();
-    })
+    if (newInstrument.length > 10){
+      this.toastr.error('Instrument name is too long')
+    }
+    else{
+      this.memberService.addInstrument(newInstrument).subscribe(() => {
+        this.toastr.success('Instrument added successfully')
+        this.editForm.reset(this.member);
+        window.location.reload();
+      })
+    }
   }
 
   removeInstrument(instrumentName) {
